@@ -2,6 +2,7 @@ import Image from '../image/Image.js';
 import RenderTexture from '../rendertexture/RenderTexture.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const SetScale = Phaser.Actions.SetScale
 const DefaultImageConfig = { key: '__WHITE' };
 const ClassMap = {
     image: Image,
@@ -24,6 +25,9 @@ var CreatePerspectiveObject = function (scene, config) {
         }
 
         perspectiveObject = new (ClassMap[config.type])(scene, config);
+        if (config.hasOwnProperty('scale')) {
+            perspectiveObject.setScale(config.scale)
+        }
         scene.add.existing(perspectiveObject);
     } else {
         perspectiveObject = config;
